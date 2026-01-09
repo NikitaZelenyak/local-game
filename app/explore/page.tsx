@@ -230,7 +230,7 @@ export default function ExplorePage() {
                 <div className="flex items-center gap-2">
                   <Tabs
                     value={view}
-                    onValueChange={(v) => setView(v as any)}
+                    onValueChange={(v) => setView(v as "map" | "list")}
                     className="w-auto"
                   >
                     <TabsList>
@@ -638,13 +638,13 @@ function FakeMap({
         </CardHeader>
 
         <CardContent className="pt-0">
-          <div className="relative h-[420px] w-full rounded-2xl border bg-gradient-to-b from-card/80 to-card/40 backdrop-blur overflow-hidden">
+          <div className="relative h-105 w-full rounded-2xl border bg-linear-to-b from-card/80 to-card/40 backdrop-blur overflow-hidden">
             {/* decorative "roads" */}
             <div className="pointer-events-none absolute inset-0 opacity-70">
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.10)_1px,transparent_0)] [background-size:22px_22px] opacity-35" />
               <div className="absolute left-[12%] top-[18%] h-px w-[76%] bg-foreground/10 rotate-[-8deg]" />
-              <div className="absolute left-[20%] top-[48%] h-px w-[68%] bg-foreground/10 rotate-[10deg]" />
-              <div className="absolute left-[24%] top-[70%] h-px w-[60%] bg-foreground/10 rotate-[-12deg]" />
+              <div className="absolute left-[20%] top-[48%] h-px w-[68%] bg-foreground/10 rotate-10" />
+              <div className="absolute left-[24%] top-[70%] h-px w-[60%] bg-foreground/10 -rotate-12" />
               <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-linear-to-br from-emerald-400/18 to-cyan-400/10 blur-2xl" />
               <div className="absolute -left-16 -bottom-16 h-48 w-48 rounded-full bg-linear-to-br from-violet-400/16 to-fuchsia-400/10 blur-2xl" />
             </div>
