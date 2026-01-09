@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo } from "react";
 import { cn } from "@/lib/utils";
 
 type AmbientBackgroundProps = {
@@ -66,24 +67,25 @@ export default function AmbientBackground({
   className,
 }: AmbientBackgroundProps) {
   const styles = VARIANTS[variant];
-  const placements = styles.glows.map((_, index) => {
-    const seed = `${variant}-${index}`;
-    return {
-      top: seededPercent(seed, 80, -20),
-      left: seededPercent(`${seed}-x`, 80, -20),
-    };
-  });
+  const placements = useMemo(
+    () =>
+      styles.glows.map(() => ({
+        top: `${Math.round(Math.random() * 80 - 20)}%`,
+        left: `${Math.round(Math.random() * 80 - 20)}%`,
+      })),
+    [styles.glows]
+  );
 
   return (
     <div
       aria-hidden="true"
-      className={cn("pointer-events-none absolute inset-0 -z-10", className)}
+      className={cn("pointer-events-none absolute inset-0 ", className)}
     >
       {styles.glows.map((glow, index) => (
         <div
           key={`${glow.color}-${index}`}
           className={cn(
-            "absolute rounded-full bg-linear-to-br blur-3xl motion-safe:animate-[pulse_36s_ease-in-out_infinite]",
+            "absolute rounded-full bg-linear-to-br blur-3xl motion-safe:animate-[pulse_10s_ease-in-out_infinite]",
             glow.size,
             glow.color
           )}
@@ -94,20 +96,9 @@ export default function AmbientBackground({
         className={cn(
           "absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.08)_1px,transparent_0)]",
           styles.grid,
-          "motion-safe:animate-[pulse_42s_ease-in-out_infinite]"
+          "motion-safe:animate-[pulse_24s_ease-in-out_infinite]"
         )}
       />
     </div>
   );
-}
-
-function seededPercent(seed: string, max: number, min: number) {
-  let hash = 0;
-  for (let i = 0; i < seed.length; i += 1) {
-    hash = (hash << 5) - hash + seed.charCodeAt(i);
-    hash |= 0;
-  }
-  const range = max - min;
-  const normalized = Math.abs(hash) % (range + 1);
-  return `${normalized + min}%`;
 }
