@@ -30,6 +30,7 @@ import { Separator } from "@/components/ui/separator";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
+import AmbientBackground from "@/components/layout/ambient-background";
 
 type Sport = "tennis" | "ping_pong";
 type Status = "live" | "busy" | "quiet";
@@ -159,6 +160,18 @@ export default function VenuePage({ params }: { params: { id: string } }) {
     []
   );
 
+  const float = useMemo(
+    () => ({
+      animate: { y: [0, -6, 0] },
+      transition: {
+        duration: 4,
+        repeat: Infinity,
+        ease: "easeInOut" as const,
+      },
+    }),
+    []
+  );
+
   const statusBadge =
     venue.status === "live"
       ? "Live now"
@@ -177,13 +190,7 @@ export default function VenuePage({ params }: { params: { id: string } }) {
     <div className="min-h-screen relative overflow-hidden bg-background">
       {/* <AppHeader active="explore" showSearch={false} /> */}
 
-      {/* Background glow */}
-      <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute -top-28 -left-24 h-[28rem] w-[28rem] rounded-full bg-gradient-to-br from-emerald-400/22 to-cyan-400/14 blur-3xl" />
-        <div className="absolute top-1/3 -right-24 h-[30rem] w-[30rem] rounded-full bg-gradient-to-br from-violet-400/18 to-fuchsia-400/12 blur-3xl" />
-        <div className="absolute -bottom-36 left-1/3 h-[34rem] w-[34rem] rounded-full bg-gradient-to-br from-amber-300/14 to-rose-400/10 blur-3xl" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.08)_1px,transparent_0)] [background-size:26px_26px] opacity-25" />
-      </div>
+      <AmbientBackground variant="soft" />
 
       <div className="max-w-6xl mx-auto p-6 md:p-8 space-y-6">
         {/* Breadcrumb + Title */}
@@ -256,13 +263,20 @@ export default function VenuePage({ params }: { params: { id: string } }) {
           {...motionIn}
           transition={{ delay: 0.05, duration: 0.55, ease: "easeOut" }}
         >
-          <Card className="relative overflow-hidden shadow-xl">
+          <Card className="relative overflow-hidden shadow-2xl border-foreground/10">
             <div className="pointer-events-none absolute inset-0 opacity-70">
               <div className="absolute -top-24 left-1/2 h-80 w-80 -translate-x-1/2 rounded-full border border-foreground/10" />
               <div className="absolute -top-16 left-1/2 h-64 w-64 -translate-x-1/2 rounded-full border border-foreground/10" />
               <div className="absolute top-24 left-10 right-10 h-px bg-foreground/10" />
               <div className="absolute bottom-20 left-10 right-10 h-px bg-foreground/10" />
             </div>
+
+            <motion.div
+              {...float}
+              className="absolute right-6 top-6 rounded-full border bg-card/80 px-3 py-1 text-xs font-semibold shadow-md"
+            >
+              {venue.sport === "tennis" ? "🎾 Rally ready" : "🏓 Rally ready"}
+            </motion.div>
 
             <CardContent className="relative p-6 md:p-7 grid gap-4 md:grid-cols-12">
               <div className="md:col-span-7 space-y-2">
@@ -334,7 +348,7 @@ export default function VenuePage({ params }: { params: { id: string } }) {
                   </CardHeader>
                   <CardContent className="space-y-3">
                     {checkedIn && (
-                      <div className="flex items-center justify-between rounded-2xl border bg-card/40 backdrop-blur p-3">
+                      <div className="flex items-center justify-between rounded-2xl border bg-card/70 backdrop-blur p-3">
                         <div className="flex items-center gap-3">
                           <Avatar className="h-9 w-9">
                             <AvatarImage src="" />
@@ -354,7 +368,7 @@ export default function VenuePage({ params }: { params: { id: string } }) {
                     {(MOCK_LIVE_PLAYERS ?? []).map((p) => (
                       <div
                         key={p.name}
-                        className="flex items-center justify-between gap-3 rounded-2xl border bg-card/40 backdrop-blur p-3 hover:bg-card/60 transition"
+                        className="flex items-center justify-between gap-3 rounded-2xl border bg-card/70 backdrop-blur p-3 hover:bg-card/60 transition"
                       >
                         <div className="flex items-center gap-3 min-w-0">
                           <Avatar className="h-9 w-9">
@@ -406,7 +420,7 @@ export default function VenuePage({ params }: { params: { id: string } }) {
                     {MOCK_MATCHES.map((m) => (
                       <div
                         key={m.id}
-                        className="rounded-2xl border bg-card/40 backdrop-blur p-4 hover:bg-card/60 transition"
+                        className="rounded-2xl border bg-card/70 backdrop-blur p-4 hover:bg-card/60 transition"
                       >
                         <div className="flex items-start justify-between gap-3">
                           <div>
@@ -443,13 +457,13 @@ export default function VenuePage({ params }: { params: { id: string } }) {
                     </CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-3 text-sm text-muted-foreground">
-                    <div className="rounded-2xl border bg-card/40 backdrop-blur p-4">
+                    <div className="rounded-2xl border bg-card/70 backdrop-blur p-4">
                       <div className="font-medium text-foreground">Surface</div>
                       <div className="text-xs text-muted-foreground mt-1">
                         Mock: Hard court / Outdoor
                       </div>
                     </div>
-                    <div className="rounded-2xl border bg-card/40 backdrop-blur p-4">
+                    <div className="rounded-2xl border bg-card/70 backdrop-blur p-4">
                       <div className="font-medium text-foreground">
                         Best time
                       </div>
@@ -457,7 +471,7 @@ export default function VenuePage({ params }: { params: { id: string } }) {
                         Mock: weekdays after 6pm, weekends morning
                       </div>
                     </div>
-                    <div className="rounded-2xl border bg-card/40 backdrop-blur p-4">
+                    <div className="rounded-2xl border bg-card/70 backdrop-blur p-4">
                       <div className="font-medium text-foreground">Rules</div>
                       <div className="text-xs text-muted-foreground mt-1">
                         Mock: be respectful, confirm scores honestly.
@@ -495,7 +509,7 @@ export default function VenuePage({ params }: { params: { id: string } }) {
                 {MOCK_LEADERBOARD.map((p) => (
                   <div
                     key={p.rank}
-                    className="flex items-center justify-between gap-3 rounded-2xl border bg-card/40 backdrop-blur p-3 hover:bg-card/60 transition"
+                    className="flex items-center justify-between gap-3 rounded-2xl border bg-card/70 backdrop-blur p-3 hover:bg-card/60 transition"
                   >
                     <div className="flex items-center gap-3 min-w-0">
                       <div className="w-7 text-xs text-muted-foreground text-center">
@@ -526,7 +540,7 @@ export default function VenuePage({ params }: { params: { id: string } }) {
 
                 <Separator className="opacity-50" />
 
-                <div className="rounded-2xl border bg-card/40 backdrop-blur p-4">
+                <div className="rounded-2xl border bg-card/70 backdrop-blur p-4">
                   <div className="text-sm font-semibold">How it works</div>
                   <div className="text-xs text-muted-foreground mt-1">
                     Report match → both confirm → ladder updates. (Later:

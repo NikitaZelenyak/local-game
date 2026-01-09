@@ -33,6 +33,7 @@ import { Separator } from "@/components/ui/separator";
 import { Switch } from "@/components/ui/switch";
 import { Slider } from "@/components/ui/slider";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import AmbientBackground from "@/components/layout/ambient-background";
 
 type Sport = "tennis" | "ping_pong";
 type Status = "live" | "busy" | "quiet";
@@ -162,13 +163,7 @@ export default function ExplorePage() {
 
   return (
     <div className="min-h-screen relative overflow-hidden bg-background">
-      {/* Background vibe */}
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -top-28 -left-24 h-[28rem] w-[28rem] rounded-full bg-gradient-to-br from-emerald-400/25 to-cyan-400/15 blur-3xl" />
-        <div className="absolute top-1/3 -right-24 h-[30rem] w-[30rem] rounded-full bg-gradient-to-br from-violet-400/20 to-fuchsia-400/12 blur-3xl" />
-        <div className="absolute -bottom-36 left-1/3 h-[34rem] w-[34rem] rounded-full bg-gradient-to-br from-amber-300/16 to-rose-400/12 blur-3xl" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.08)_1px,transparent_0)] [background-size:26px_26px] opacity-35" />
-      </div>
+      <AmbientBackground />
 
       <div className="relative max-w-6xl mx-auto p-6 md:p-8 space-y-6">
         {/* Top */}
@@ -422,7 +417,7 @@ export default function ExplorePage() {
                   <Mini label="Vibe" value={`${selected.vibe}/10`} />
                 </div>
 
-                <div className="rounded-2xl border bg-card/40 backdrop-blur p-4 space-y-2">
+                <div className="rounded-2xl border bg-card/70 backdrop-blur p-4 space-y-2">
                   <div className="text-sm font-semibold">
                     What you can do here
                   </div>
@@ -497,7 +492,7 @@ function Chip({
         "inline-flex items-center gap-2 rounded-full border px-3 py-1 text-sm transition",
         active
           ? "bg-foreground text-background border-foreground"
-          : "bg-card/40 backdrop-blur hover:bg-card/60",
+          : "bg-card/70 backdrop-blur hover:bg-card/60",
       ].join(" ")}
     >
       {children}
@@ -507,7 +502,7 @@ function Chip({
 
 function Mini({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-2xl border bg-card/40 backdrop-blur px-3 py-2">
+    <div className="rounded-2xl border bg-card/70 backdrop-blur px-3 py-2">
       <div className="text-[11px] text-muted-foreground">{label}</div>
       <div className="text-sm font-semibold">{value}</div>
     </div>
@@ -524,7 +519,7 @@ function Mission({
   progress: number;
 }) {
   return (
-    <div className="rounded-2xl border bg-card/40 backdrop-blur p-4">
+    <div className="rounded-2xl border bg-card/70 backdrop-blur p-4">
       <div className="flex items-start justify-between gap-3">
         <div>
           <div className="text-sm font-semibold">{title}</div>
@@ -639,7 +634,7 @@ function FakeMap({
       </CardHeader>
 
       <CardContent className="pt-0">
-        <div className="relative h-[420px] w-full rounded-2xl border bg-gradient-to-b from-card/70 to-card/30 backdrop-blur overflow-hidden">
+        <div className="relative h-[420px] w-full rounded-2xl border bg-gradient-to-b from-card/80 to-card/40 backdrop-blur overflow-hidden">
           {/* decorative "roads" */}
           <div className="pointer-events-none absolute inset-0 opacity-70">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.10)_1px,transparent_0)] [background-size:22px_22px] opacity-35" />
@@ -649,6 +644,30 @@ function FakeMap({
             <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-gradient-to-br from-emerald-400/18 to-cyan-400/10 blur-2xl" />
             <div className="absolute -left-16 -bottom-16 h-48 w-48 rounded-full bg-gradient-to-br from-violet-400/16 to-fuchsia-400/10 blur-2xl" />
           </div>
+
+          <motion.div
+            animate={{ y: [0, -6, 0] }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            className="absolute left-6 top-6 rounded-full border bg-card/80 px-3 py-1 text-xs font-semibold shadow-md"
+          >
+            🎾 Live rallies
+          </motion.div>
+          <motion.div
+            animate={{ y: [0, -6, 0] }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              delay: 0.7,
+              ease: "easeInOut",
+            }}
+            className="absolute right-6 top-10 rounded-full border bg-card/80 px-3 py-1 text-xs font-semibold shadow-md"
+          >
+            🏓 Fast tables
+          </motion.div>
 
           {/* pins */}
           {venues.map((v) => (
@@ -698,8 +717,8 @@ function Pin({
     <motion.button
       onClick={onClick}
       className={[
-        "absolute -translate-x-1/2 -translate-y-1/2 rounded-full border bg-background/80 backdrop-blur px-2 py-1 shadow-sm",
-        selected ? "ring-2 ring-foreground" : "hover:bg-background",
+        "absolute -translate-x-1/2 -translate-y-1/2 rounded-full border bg-card/80 backdrop-blur px-2 py-1 shadow-sm",
+        selected ? "ring-2 ring-foreground" : "hover:bg-card",
       ].join(" ")}
       style={{ left: `${venue.x}%`, top: `${venue.y}%` }}
       whileHover={{ y: -2, scale: 1.03 }}

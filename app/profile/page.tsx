@@ -33,6 +33,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
 import { Switch } from "@/components/ui/switch";
 import { Slider } from "@/components/ui/slider";
+import AmbientBackground from "@/components/layout/ambient-background";
 
 type Level = "Beginner" | "Intermediate" | "Advanced";
 type Hand =
@@ -71,13 +72,7 @@ export default function ProfilePage() {
 
   return (
     <div className="min-h-screen relative overflow-hidden bg-background">
-      {/* Background (like your login page vibe) */}
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -top-28 -left-24 h-[28rem] w-[28rem] rounded-full bg-gradient-to-br from-emerald-400/25 to-cyan-400/15 blur-3xl" />
-        <div className="absolute top-1/3 -right-24 h-[30rem] w-[30rem] rounded-full bg-gradient-to-br from-violet-400/20 to-fuchsia-400/12 blur-3xl" />
-        <div className="absolute -bottom-32 left-1/3 h-[34rem] w-[34rem] rounded-full bg-gradient-to-br from-amber-300/16 to-rose-400/12 blur-3xl" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.08)_1px,transparent_0)] [background-size:26px_26px] opacity-35" />
-      </div>
+      <AmbientBackground />
 
       <div className="relative max-w-6xl mx-auto p-6 md:p-8 space-y-6">
         {/* Top bar */}
@@ -193,7 +188,7 @@ export default function ProfilePage() {
                     <MiniStat label="Streak" value="3W" />
                   </div>
 
-                  <div className="rounded-2xl border bg-card/40 backdrop-blur p-4 space-y-3">
+                  <div className="rounded-2xl border bg-card/70 backdrop-blur p-4 space-y-3">
                     <div className="flex items-center justify-between">
                       <div className="text-sm font-medium">Setup progress</div>
                       <Badge variant="secondary">{setupProgress}%</Badge>
@@ -285,7 +280,7 @@ export default function ProfilePage() {
                     />
                   </div>
 
-                  <div className="flex items-center justify-between rounded-2xl border bg-card/40 backdrop-blur px-4 py-3">
+                  <div className="flex items-center justify-between rounded-2xl border bg-card/70 backdrop-blur px-4 py-3">
                     <div className="space-y-0.5">
                       <div className="text-sm font-medium">
                         Show profile publicly
@@ -396,7 +391,7 @@ export default function ProfilePage() {
 
 function MiniStat({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-2xl border bg-card/40 backdrop-blur px-4 py-3">
+    <div className="rounded-2xl border bg-card/70 backdrop-blur px-4 py-3">
       <div className="text-xs text-muted-foreground">{label}</div>
       <div className="text-lg font-semibold">{value}</div>
     </div>
@@ -416,7 +411,7 @@ function Step({ done, label }: { done?: boolean; label: string }) {
 
 function ActionRow({ title, desc }: { title: string; desc: string }) {
   return (
-    <div className="flex items-start justify-between gap-3 rounded-2xl border bg-card/40 backdrop-blur p-4 hover:bg-card/60 transition">
+    <div className="flex items-start justify-between gap-3 rounded-2xl border bg-card/70 backdrop-blur p-4 hover:bg-card/60 transition">
       <div className="space-y-1">
         <div className="text-sm font-semibold">{title}</div>
         <div className="text-xs text-muted-foreground">{desc}</div>
@@ -527,7 +522,7 @@ function SportCard(props: {
 
         <div className="space-y-2">
           <Label>Competitive vibe</Label>
-          <div className="rounded-2xl border bg-card/40 backdrop-blur p-4 space-y-3">
+          <div className="rounded-2xl border bg-card/70 backdrop-blur p-4 space-y-3">
             <div className="flex items-center justify-between">
               <div className="text-sm font-medium">Intensity</div>
               <Badge variant="secondary">{vibe[0]} / 10</Badge>

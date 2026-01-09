@@ -19,6 +19,7 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import ThemeToggle from "@/components/ui/theme-toggle";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -73,12 +74,12 @@ export default function AppHeader({
   return (
     <motion.header
       {...motionIn}
-      className="sticky top-0 z-50 border-b bg-background/60 backdrop-blur-xl"
+      className="sticky top-0 z-50 border-b bg-background/70 backdrop-blur-xl"
     >
       {/* subtle glow */}
       <div className="pointer-events-none absolute inset-0 opacity-80">
-        <div className="absolute -left-24 -top-12 h-40 w-40 rounded-full bg-gradient-to-br from-emerald-400/18 to-cyan-400/10 blur-2xl" />
-        <div className="absolute -right-24 -top-16 h-44 w-44 rounded-full bg-gradient-to-br from-violet-400/14 to-fuchsia-400/10 blur-2xl" />
+        <div className="absolute -left-24 -top-12 h-40 w-40 rounded-full bg-gradient-to-br from-emerald-400/18 to-sky-400/10 blur-2xl" />
+        <div className="absolute -right-24 -top-16 h-44 w-44 rounded-full bg-gradient-to-br from-amber-300/16 to-orange-300/10 blur-2xl" />
       </div>
 
       <div className="relative mx-auto max-w-6xl px-4 py-3">
@@ -86,15 +87,15 @@ export default function AppHeader({
           {/* Brand */}
           <div className="flex items-center gap-3 min-w-0">
             <Link href="/" className="flex items-center gap-2 min-w-0">
-              <div className="h-9 w-9 rounded-2xl border bg-card/40 backdrop-blur flex items-center justify-center shadow-sm">
+              <div className="h-9 w-9 rounded-2xl border bg-card/70 backdrop-blur flex items-center justify-center shadow-sm">
                 <Zap className="h-4 w-4" />
               </div>
               <div className="min-w-0">
                 <div className="text-sm font-semibold leading-tight truncate">
-                  Local Ladder
+                  Local Game
                 </div>
                 <div className="text-[11px] text-muted-foreground leading-tight truncate">
-                  Toronto courts & tables
+                  Toronto courts + tables
                 </div>
               </div>
             </Link>
@@ -125,7 +126,7 @@ export default function AppHeader({
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <Input
                   placeholder="Search venues… (High Park, Waterfront)"
-                  className="pl-9 bg-card/40 backdrop-blur"
+                  className="pl-9 bg-card/70 backdrop-blur"
                 />
               </div>
             </div>
@@ -139,7 +140,9 @@ export default function AppHeader({
 
             <Separator orientation="vertical" className="hidden sm:block h-7" />
 
-            <div className="hidden sm:flex items-center gap-2 rounded-full border bg-card/40 backdrop-blur px-2 py-1">
+            <ThemeToggle />
+
+            <div className="hidden sm:flex items-center gap-2 rounded-full border bg-card/70 backdrop-blur px-2 py-1">
               <Avatar className="h-7 w-7">
                 <AvatarImage src="" />
                 <AvatarFallback>NZ</AvatarFallback>
@@ -184,7 +187,7 @@ export default function AppHeader({
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input
                 placeholder="Search venues…"
-                className="pl-9 bg-card/40 backdrop-blur"
+                className="pl-9 bg-card/70 backdrop-blur"
               />
             </div>
           </div>

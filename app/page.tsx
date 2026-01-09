@@ -27,6 +27,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import AmbientBackground from "@/components/layout/ambient-background";
+import ThemeToggle from "@/components/ui/theme-toggle";
 
 export default function LandingPage() {
   const motionIn = useMemo(
@@ -38,15 +40,23 @@ export default function LandingPage() {
     []
   );
 
+  const float = useMemo(
+    () => ({
+      animate: {
+        y: [0, -6, 0],
+      },
+      transition: {
+        duration: 4,
+        repeat: Infinity,
+        ease: "easeInOut" as const,
+      },
+    }),
+    []
+  );
+
   return (
     <div className="min-h-screen relative overflow-hidden bg-background">
-      {/* Background glow */}
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -top-28 -left-24 h-[28rem] w-[28rem] rounded-full bg-gradient-to-br from-emerald-400/25 to-cyan-400/15 blur-3xl" />
-        <div className="absolute top-1/3 -right-24 h-[30rem] w-[30rem] rounded-full bg-gradient-to-br from-violet-400/20 to-fuchsia-400/12 blur-3xl" />
-        <div className="absolute -bottom-36 left-1/3 h-[34rem] w-[34rem] rounded-full bg-gradient-to-br from-amber-300/16 to-rose-400/12 blur-3xl" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.08)_1px,transparent_0)] [background-size:26px_26px] opacity-35" />
-      </div>
+      <AmbientBackground />
 
       {/* Header */}
       <header className="relative mx-auto max-w-6xl px-6 pt-6">
@@ -55,7 +65,7 @@ export default function LandingPage() {
           className="flex items-center justify-between gap-3"
         >
           <Link href="/" className="flex items-center gap-2">
-            <div className="h-10 w-10 rounded-2xl border bg-card/40 backdrop-blur flex items-center justify-center shadow-sm">
+            <div className="h-10 w-10 rounded-2xl border bg-card/70 backdrop-blur flex items-center justify-center shadow-sm">
               <Zap className="h-4 w-4" />
             </div>
             <div className="leading-tight">
@@ -79,6 +89,7 @@ export default function LandingPage() {
           </nav>
 
           <div className="flex items-center gap-2">
+            <ThemeToggle />
             <Button asChild variant="outline">
               <Link href="/login">Log in</Link>
             </Button>
@@ -115,7 +126,9 @@ export default function LandingPage() {
               </div>
 
               <h1 className="text-4xl md:text-5xl font-semibold tracking-tight leading-[1.05]">
-                Find players near you.
+                <span className="bg-gradient-to-r from-emerald-600 to-sky-500 bg-clip-text text-transparent dark:from-emerald-300 dark:to-sky-300">
+                  Find players near you.
+                </span>
                 <span className="block text-muted-foreground">
                   Check in. Play. Confirm. Climb.
                 </span>
@@ -162,7 +175,7 @@ export default function LandingPage() {
               transition={{ delay: 0.08, duration: 0.55, ease: "easeOut" }}
               whileHover={{ y: -3 }}
             >
-              <Card className="shadow-2xl overflow-hidden">
+              <Card className="shadow-2xl overflow-hidden border-foreground/10">
                 <CardHeader className="pb-3">
                   <div className="flex items-start justify-between gap-3">
                     <div>
@@ -181,13 +194,34 @@ export default function LandingPage() {
                 </CardHeader>
 
                 <CardContent className="pt-0">
-                  <div className="relative h-[320px] w-full rounded-2xl border bg-gradient-to-b from-card/70 to-card/30 backdrop-blur overflow-hidden">
+                  <div className="relative h-[320px] w-full rounded-2xl border bg-gradient-to-b from-card/80 to-card/40 backdrop-blur overflow-hidden">
                     <div className="pointer-events-none absolute inset-0 opacity-70">
                       <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.10)_1px,transparent_0)] [background-size:22px_22px] opacity-35" />
                       <div className="absolute left-[12%] top-[18%] h-px w-[76%] bg-foreground/10 rotate-[-8deg]" />
                       <div className="absolute left-[20%] top-[48%] h-px w-[68%] bg-foreground/10 rotate-[10deg]" />
                       <div className="absolute left-[24%] top-[70%] h-px w-[60%] bg-foreground/10 rotate-[-12deg]" />
                     </div>
+
+                    <motion.div
+                      {...float}
+                      className="absolute left-6 top-5 rounded-full border bg-card/80 px-3 py-1 text-xs font-semibold shadow-md"
+                    >
+                      🎾 Tennis
+                    </motion.div>
+                    <motion.div
+                      {...float}
+                      transition={{ ...float.transition, delay: 0.6 }}
+                      className="absolute right-6 top-10 rounded-full border bg-card/80 px-3 py-1 text-xs font-semibold shadow-md"
+                    >
+                      🏓 Ping Pong
+                    </motion.div>
+                    <motion.div
+                      {...float}
+                      transition={{ ...float.transition, delay: 1.1 }}
+                      className="absolute left-10 bottom-10 rounded-full border bg-card/80 px-3 py-1 text-xs font-semibold shadow-md"
+                    >
+                      🥇 Ladder
+                    </motion.div>
 
                     <MapPinDemo x={32} y={62} label="🎾 7" live />
                     <MapPinDemo x={58} y={72} label="🏓 4" live />
@@ -380,7 +414,7 @@ function MapPinDemo({
 }) {
   return (
     <button
-      className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full border bg-background/80 backdrop-blur px-2 py-1 shadow-sm hover:bg-background transition"
+      className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full border bg-card/80 backdrop-blur px-2 py-1 shadow-md hover:bg-card transition"
       style={{ left: `${x}%`, top: `${y}%` }}
       aria-label="Map pin"
     >
@@ -410,7 +444,7 @@ function StepCard({
   return (
     <Card className="shadow-lg">
       <CardContent className="p-5">
-        <div className="inline-flex h-10 w-10 items-center justify-center rounded-2xl border bg-card/40 backdrop-blur shadow-sm">
+        <div className="inline-flex h-10 w-10 items-center justify-center rounded-2xl border bg-card/70 backdrop-blur shadow-sm">
           <span className="text-muted-foreground">{icon}</span>
         </div>
         <div className="mt-3 text-sm font-semibold">{title}</div>
@@ -428,7 +462,7 @@ function FeatureCard({ title, desc }: { title: string; desc: string }) {
         <CardDescription>{desc}</CardDescription>
       </CardHeader>
       <CardContent className="pt-0">
-        <div className="rounded-2xl border bg-card/40 backdrop-blur p-4 text-xs text-muted-foreground">
+        <div className="rounded-2xl border bg-card/70 backdrop-blur p-4 text-xs text-muted-foreground">
           UI-only — later this will show real data and real venues.
         </div>
       </CardContent>

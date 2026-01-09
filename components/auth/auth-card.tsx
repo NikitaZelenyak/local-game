@@ -24,7 +24,7 @@ export default function AuthCard() {
 
   return (
     <motion.div {...floating} className="w-full max-w-md">
-      <Card className="relative overflow-hidden shadow-xl">
+      <Card className="relative overflow-hidden shadow-2xl border-foreground/10 bg-card/80">
         {/* decorative court lines */}
         <div className="pointer-events-none absolute inset-0 opacity-70">
           <div className="absolute -top-24 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full border border-foreground/10" />

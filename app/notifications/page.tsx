@@ -33,6 +33,7 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Switch } from "@/components/ui/switch";
+import AmbientBackground from "@/components/layout/ambient-background";
 
 type NotifType =
   | "match_confirm"
@@ -142,13 +143,7 @@ export default function NotificationsPage() {
 
   return (
     <div className="min-h-screen relative overflow-hidden bg-background">
-      {/* Background glow */}
-      <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute -top-28 -left-24 h-[28rem] w-[28rem] rounded-full bg-gradient-to-br from-emerald-400/22 to-cyan-400/14 blur-3xl" />
-        <div className="absolute top-1/3 -right-24 h-[30rem] w-[30rem] rounded-full bg-gradient-to-br from-violet-400/18 to-fuchsia-400/12 blur-3xl" />
-        <div className="absolute -bottom-36 left-1/3 h-[34rem] w-[34rem] rounded-full bg-gradient-to-br from-amber-300/14 to-rose-400/10 blur-3xl" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.08)_1px,transparent_0)] [background-size:26px_26px] opacity-25" />
-      </div>
+      <AmbientBackground variant="soft" />
 
       <div className="max-w-5xl mx-auto p-6 md:p-8 space-y-6">
         {/* Header */}
@@ -349,7 +344,7 @@ function NotifCard({ n }: { n: Notif }) {
 
       <CardContent className="relative p-4">
         <div className="flex items-start gap-3">
-          <div className="mt-0.5 inline-flex h-9 w-9 items-center justify-center rounded-2xl border bg-card/40 backdrop-blur shadow-sm">
+          <div className="mt-0.5 inline-flex h-9 w-9 items-center justify-center rounded-2xl border bg-card/70 backdrop-blur shadow-sm">
             <span className="text-muted-foreground">{icon}</span>
           </div>
 

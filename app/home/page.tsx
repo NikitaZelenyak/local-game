@@ -28,6 +28,7 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Progress } from "@/components/ui/progress";
+import AmbientBackground from "@/components/layout/ambient-background";
 
 type Sport = "Tennis" | "Ping Pong";
 
@@ -156,15 +157,29 @@ export default function HomePage() {
     []
   );
 
+  const badgeIn = useMemo(
+    () => ({
+      initial: { y: 8, opacity: 0 },
+      animate: { y: 0, opacity: 1 },
+    }),
+    []
+  );
+
+  const float = useMemo(
+    () => ({
+      animate: { y: [0, -6, 0] },
+      transition: {
+        duration: 4,
+        repeat: Infinity,
+        ease: "easeInOut" as const,
+      },
+    }),
+    []
+  );
+
   return (
     <div className="min-h-screen relative overflow-hidden bg-background">
-      {/* WOW background */}
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -top-28 -left-24 h-[28rem] w-[28rem] rounded-full bg-gradient-to-br from-emerald-400/25 to-cyan-400/15 blur-3xl" />
-        <div className="absolute top-1/3 -right-24 h-[30rem] w-[30rem] rounded-full bg-gradient-to-br from-violet-400/20 to-fuchsia-400/12 blur-3xl" />
-        <div className="absolute -bottom-36 left-1/3 h-[34rem] w-[34rem] rounded-full bg-gradient-to-br from-amber-300/16 to-rose-400/12 blur-3xl" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.08)_1px,transparent_0)] [background-size:26px_26px] opacity-35" />
-      </div>
+      <AmbientBackground />
 
       <div className="relative max-w-6xl mx-auto p-6 md:p-8 space-y-6">
         {/* Top */}
@@ -173,23 +188,36 @@ export default function HomePage() {
           className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between"
         >
           <div className="space-y-2">
-            <div className="flex items-center gap-2 flex-wrap">
-              <Badge variant="secondary" className="gap-2">
-                <Zap className="h-3.5 w-3.5" />
-                Toronto beta
-              </Badge>
-              <Badge variant="outline" className="gap-2">
-                <Radar className="h-3.5 w-3.5" />
-                Live venues
-              </Badge>
-              <Badge variant="outline" className="gap-2">
-                <Sparkles className="h-3.5 w-3.5" />
-                UI-only
-              </Badge>
-            </div>
+            <motion.div
+              variants={stagger}
+              initial="initial"
+              animate="animate"
+              className="flex items-center gap-2 flex-wrap"
+            >
+              <motion.div variants={badgeIn}>
+                <Badge variant="secondary" className="gap-2">
+                  <Zap className="h-3.5 w-3.5" />
+                  Toronto beta
+                </Badge>
+              </motion.div>
+              <motion.div variants={badgeIn}>
+                <Badge variant="outline" className="gap-2">
+                  <Radar className="h-3.5 w-3.5" />
+                  Live venues
+                </Badge>
+              </motion.div>
+              <motion.div variants={badgeIn}>
+                <Badge variant="outline" className="gap-2">
+                  <Sparkles className="h-3.5 w-3.5" />
+                  UI-only
+                </Badge>
+              </motion.div>
+            </motion.div>
 
             <h1 className="text-3xl md:text-4xl font-semibold tracking-tight">
-              Hey, {MOCK_USER.name} 👋
+              <span className="bg-gradient-to-r from-emerald-600 to-sky-500 bg-clip-text text-transparent dark:from-emerald-300 dark:to-sky-300">
+                Hey, {MOCK_USER.name} 👋
+              </span>
             </h1>
             <p className="text-sm text-muted-foreground max-w-2xl">
               Check in, find a match, confirm the score — and climb your local
@@ -214,7 +242,7 @@ export default function HomePage() {
           {...motionIn}
           transition={{ delay: 0.05, duration: 0.55, ease: "easeOut" }}
         >
-          <Card className="relative overflow-hidden shadow-xl">
+          <Card className="relative overflow-hidden shadow-2xl border-foreground/10">
             {/* court lines + subtle glow */}
             <div className="pointer-events-none absolute inset-0 opacity-70">
               <div className="absolute -top-24 left-1/2 h-80 w-80 -translate-x-1/2 rounded-full border border-foreground/10" />
@@ -224,6 +252,20 @@ export default function HomePage() {
               <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-gradient-to-br from-emerald-400/20 to-cyan-400/10 blur-2xl" />
               <div className="absolute -left-16 -bottom-16 h-40 w-40 rounded-full bg-gradient-to-br from-violet-400/16 to-fuchsia-400/10 blur-2xl" />
             </div>
+
+            <motion.div
+              {...float}
+              className="absolute right-6 top-6 rounded-full border bg-card/80 px-3 py-1 text-xs font-semibold shadow-md"
+            >
+              🎾 Tennis pulse
+            </motion.div>
+            <motion.div
+              {...float}
+              transition={{ ...float.transition, delay: 0.7 }}
+              className="absolute right-6 top-14 rounded-full border bg-card/80 px-3 py-1 text-xs font-semibold shadow-md"
+            >
+              🏓 Ping pong pulse
+            </motion.div>
 
             <CardContent className="relative p-6 md:p-7">
               <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
@@ -380,7 +422,7 @@ export default function HomePage() {
                   {MOCK_ACTIVITY.map((a) => (
                     <div
                       key={a.id}
-                      className="rounded-2xl border bg-card/40 backdrop-blur p-4 hover:bg-card/60 transition"
+                      className="rounded-2xl border bg-card/70 backdrop-blur p-4 hover:bg-card/60 transition"
                     >
                       <div className="flex items-start justify-between gap-3">
                         <div>
@@ -417,7 +459,7 @@ export default function HomePage() {
                   {MOCK_PLAYERS.map((p) => (
                     <div
                       key={p.name}
-                      className="flex items-center justify-between gap-3 rounded-2xl border bg-card/40 backdrop-blur p-3 hover:bg-card/60 transition"
+                      className="flex items-center justify-between gap-3 rounded-2xl border bg-card/70 backdrop-blur p-3 hover:bg-card/60 transition"
                     >
                       <div className="flex items-center gap-3 min-w-0">
                         <Avatar className="h-9 w-9">
@@ -488,7 +530,7 @@ function HeroPill({
   desc: string;
 }) {
   return (
-    <div className="rounded-2xl border bg-card/40 backdrop-blur px-3 py-2 shadow-sm">
+    <div className="rounded-2xl border bg-card/70 backdrop-blur px-3 py-2 shadow-sm">
       <div className="flex items-center gap-2">
         <div className="text-muted-foreground">{icon}</div>
         <div className="text-sm font-semibold">{title}</div>
@@ -556,7 +598,7 @@ function VenueCard({ venue }: { venue: (typeof MOCK_VENUES)[number] }) {
 
 function Mini({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-2xl border bg-card/40 backdrop-blur px-3 py-2">
+    <div className="rounded-2xl border bg-card/70 backdrop-blur px-3 py-2">
       <div className="text-[11px] text-muted-foreground">{label}</div>
       <div className="text-sm font-semibold">{value}</div>
     </div>
