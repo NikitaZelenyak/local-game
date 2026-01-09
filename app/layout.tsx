@@ -24,9 +24,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="h-full overflow-x-hidden">
       <body
-        className={`${sora.variable} ${jetbrainsMono.variable} antialiased transition-colors duration-300`}
+        className={`${sora.variable} ${jetbrainsMono.variable} antialiased transition-colors duration-300 min-h-screen overflow-x-hidden`}
       >
         <ConditionalHeader />
         {children}

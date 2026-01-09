@@ -49,7 +49,7 @@ export default function AppHeader({
     key: HeaderProps["active"],
     href: string,
     label: string,
-    Icon: any
+    Icon: React.ComponentType<{ className: string }>
   ) => {
     const isActive = active === key;
     return (
@@ -78,8 +78,8 @@ export default function AppHeader({
     >
       {/* subtle glow */}
       <div className="pointer-events-none absolute inset-0 opacity-80">
-        <div className="absolute -left-24 -top-12 h-40 w-40 rounded-full bg-gradient-to-br from-emerald-400/18 to-sky-400/10 blur-2xl" />
-        <div className="absolute -right-24 -top-16 h-44 w-44 rounded-full bg-gradient-to-br from-amber-300/16 to-orange-300/10 blur-2xl" />
+        <div className="absolute -left-24 -top-12 h-40 w-40 rounded-full bg-linear-to-br from-emerald-400/18 to-sky-400/10 blur-2xl" />
+        <div className="absolute -right-24 -top-16 h-44 w-44 rounded-full bg-linear-to-br from-amber-300/16 to-orange-300/10 blur-2xl" />
       </div>
 
       <div className="relative mx-auto max-w-6xl px-4 py-3">

@@ -249,8 +249,8 @@ export default function HomePage() {
               <div className="absolute -top-16 left-1/2 h-64 w-64 -translate-x-1/2 rounded-full border border-foreground/10" />
               <div className="absolute top-24 left-10 right-10 h-px bg-foreground/10" />
               <div className="absolute bottom-20 left-10 right-10 h-px bg-foreground/10" />
-              <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-gradient-to-br from-emerald-400/20 to-cyan-400/10 blur-2xl" />
-              <div className="absolute -left-16 -bottom-16 h-40 w-40 rounded-full bg-gradient-to-br from-violet-400/16 to-fuchsia-400/10 blur-2xl" />
+              <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-linear-to-br from-emerald-400/20 to-cyan-400/10 blur-2xl" />
+              <div className="absolute -left-16 -bottom-16 h-40 w-40 rounded-full bg-linear-to-br from-violet-400/16 to-fuchsia-400/10 blur-2xl" />
             </div>
 
             <motion.div
@@ -551,8 +551,8 @@ function VenueCard({ venue }: { venue: (typeof MOCK_VENUES)[number] }) {
   return (
     <Card className="relative overflow-hidden shadow-lg">
       <div className="pointer-events-none absolute inset-0 opacity-70">
-        <div className="absolute -right-10 -top-10 h-28 w-28 rounded-full bg-gradient-to-br from-emerald-400/18 to-cyan-400/10 blur-2xl" />
-        <div className="absolute -left-12 -bottom-12 h-28 w-28 rounded-full bg-gradient-to-br from-violet-400/14 to-fuchsia-400/10 blur-2xl" />
+        <div className="absolute -right-10 -top-10 h-28 w-28 rounded-full bg-linear-to-br from-emerald-400/18 to-cyan-400/10 blur-2xl" />
+        <div className="absolute -left-12 -bottom-12 h-28 w-28 rounded-full bg-linear-to-br from-violet-400/14 to-fuchsia-400/10 blur-2xl" />
       </div>
 
       <CardHeader className="relative">

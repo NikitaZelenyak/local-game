@@ -447,8 +447,8 @@ function SportCard(props: {
       >
         <div className="rounded-3xl border bg-gradient-to-b from-card/80 to-card/40 backdrop-blur p-4 shadow-sm relative overflow-hidden">
           <div className="pointer-events-none absolute inset-0 opacity-70">
-            <div className="absolute -top-10 -right-10 h-28 w-28 rounded-full bg-gradient-to-br from-emerald-400/20 to-cyan-400/10 blur-2xl" />
-            <div className="absolute -bottom-12 -left-10 h-28 w-28 rounded-full bg-gradient-to-br from-violet-400/16 to-fuchsia-400/10 blur-2xl" />
+            <div className="absolute -top-10 -right-10 h-28 w-28 rounded-full bg-linear-to-br from-emerald-400/20 to-cyan-400/10 blur-2xl" />
+            <div className="absolute -bottom-12 -left-10 h-28 w-28 rounded-full bg-linear-to-br from-violet-400/16 to-fuchsia-400/10 blur-2xl" />
           </div>
 
           <div className="relative">

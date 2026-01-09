@@ -338,8 +338,8 @@ function NotifCard({ n }: { n: Notif }) {
     <Card className="relative overflow-hidden shadow-lg">
       {/* subtle glow */}
       <div className="pointer-events-none absolute inset-0 opacity-70">
-        <div className="absolute -right-10 -top-10 h-28 w-28 rounded-full bg-gradient-to-br from-emerald-400/14 to-cyan-400/10 blur-2xl" />
-        <div className="absolute -left-12 -bottom-12 h-28 w-28 rounded-full bg-gradient-to-br from-violet-400/12 to-fuchsia-400/10 blur-2xl" />
+        <div className="absolute -right-10 -top-10 h-28 w-28 rounded-full bg-linear-to-br from-emerald-400/14 to-cyan-400/10 blur-2xl" />
+        <div className="absolute -left-12 -bottom-12 h-28 w-28 rounded-full bg-linear-to-br from-violet-400/12 to-fuchsia-400/10 blur-2xl" />
       </div>
 
       <CardContent className="relative p-4">

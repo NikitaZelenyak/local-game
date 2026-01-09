@@ -41,15 +41,12 @@ export default function AmbientBackground({
   return (
     <div
       aria-hidden="true"
-      className={cn("pointer-events-none absolute inset-0 -z-10", className)}
+      className={cn("pointer-events-none absolute inset-0 z-0", className)}
     >
       {styles.glows.map((glow) => (
         <div
           key={glow}
-          className={cn(
-            "absolute rounded-full bg-gradient-to-br blur-3xl",
-            glow
-          )}
+          className={cn("absolute rounded-full bg-linear-to-br blur-3xl", glow)}
         />
       ))}
       <div

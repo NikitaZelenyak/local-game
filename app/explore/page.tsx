@@ -641,8 +641,8 @@ function FakeMap({
             <div className="absolute left-[12%] top-[18%] h-px w-[76%] bg-foreground/10 rotate-[-8deg]" />
             <div className="absolute left-[20%] top-[48%] h-px w-[68%] bg-foreground/10 rotate-[10deg]" />
             <div className="absolute left-[24%] top-[70%] h-px w-[60%] bg-foreground/10 rotate-[-12deg]" />
-            <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-gradient-to-br from-emerald-400/18 to-cyan-400/10 blur-2xl" />
-            <div className="absolute -left-16 -bottom-16 h-48 w-48 rounded-full bg-gradient-to-br from-violet-400/16 to-fuchsia-400/10 blur-2xl" />
+            <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-linear-to-br from-emerald-400/18 to-cyan-400/10 blur-2xl" />
+            <div className="absolute -left-16 -bottom-16 h-48 w-48 rounded-full bg-linear-to-br from-violet-400/16 to-fuchsia-400/10 blur-2xl" />
           </div>
 
           <motion.div
