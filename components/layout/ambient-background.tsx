@@ -20,7 +20,10 @@ const VARIANTS = {
         size: "h-[30rem] w-[30rem]",
         color: "from-amber-300/20 to-orange-400/12",
       },
-      { size: "h-[34rem] w-[34rem]", color: "from-cyan-300/20 to-lime-300/12" },
+      {
+        size: "h-[34rem] w-[34rem]",
+        color: "from-cyan-300/20 to-lime-300/12",
+      },
     ],
   },
   soft: {
@@ -34,7 +37,10 @@ const VARIANTS = {
         size: "h-[26rem] w-[26rem]",
         color: "from-amber-300/14 to-orange-400/10",
       },
-      { size: "h-[28rem] w-[28rem]", color: "from-cyan-300/14 to-lime-300/10" },
+      {
+        size: "h-[28rem] w-[28rem]",
+        color: "from-cyan-300/14 to-lime-300/10",
+      },
     ],
   },
   auth: {
@@ -48,7 +54,10 @@ const VARIANTS = {
         size: "h-[32rem] w-[32rem]",
         color: "from-amber-300/22 to-orange-400/16",
       },
-      { size: "h-[32rem] w-[32rem]", color: "from-cyan-300/22 to-lime-300/14" },
+      {
+        size: "h-[32rem] w-[32rem]",
+        color: "from-cyan-300/22 to-lime-300/14",
+      },
     ],
   },
 };
@@ -70,13 +79,13 @@ export default function AmbientBackground({
   return (
     <div
       aria-hidden="true"
-      className={cn("pointer-events-none absolute inset-0 -z-10", className)}
+      className={cn("pointer-events-none absolute inset-0 z-0", className)}
     >
       {styles.glows.map((glow, index) => (
         <div
           key={`${glow.color}-${index}`}
           className={cn(
-            "absolute rounded-full bg-linear-to-br blur-3xl motion-safe:animate-[pulse_20s_ease-in-out_infinite]",
+            "absolute rounded-full bg-linear-to-br blur-3xl motion-safe:animate-[pulse_10_ease-in-out_infinite]",
             glow.size,
             glow.color
           )}
@@ -87,7 +96,7 @@ export default function AmbientBackground({
         className={cn(
           "absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.08)_1px,transparent_0)]",
           styles.grid,
-          "motion-safe:animate-[pulse_24s_ease-in-out_infinite]"
+          "motion-safe:animate-[pulse_42s_ease-in-out_infinite]"
         )}
       />
     </div>
